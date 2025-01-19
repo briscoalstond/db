@@ -1,0 +1,2 @@
+filtered_data = data[data['age'] > 30]  # 筛选年龄大于30的行
+print(filtered_data)
