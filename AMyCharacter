@@ -1,0 +1,4 @@
+bool AMyCharacter::IsOnGround() const
+{
+    return GetCharacterMovement()->IsMovingOnGround();
+}
