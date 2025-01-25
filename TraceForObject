@@ -1,0 +1,18 @@
+void AMyCharacter::TraceForObject()
+{
+    FVector Start = CameraComponent->GetComponentLocation();
+    FVector End = Start + (CameraComponent->GetForwardVector() * TraceDistance);
+    FHitResult HitResult;
+
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(this);
+
+    if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, Params))
+    {
+        AInteractableActor* Interactable = Cast<AInteractableActor>(HitResult.Actor);
+        if (Interactable)
+        {
+            Interactable->Interact();
+        }
+    }
+}
