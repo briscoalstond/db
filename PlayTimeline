@@ -1,0 +1,15 @@
+void AMyActor::PlayTimeline()
+{
+	if (CurveFloat)
+	{
+		FOnTimelineFloat TimelineCallback;
+		TimelineCallback.BindUFunction(this, FName("OnTimelineUpdate"));
+		MyTimeline.AddInterpFloat(CurveFloat, TimelineCallback);
+		MyTimeline.PlayFromStart();
+	}
+}
+
+void AMyActor::OnTimelineUpdate(float Value)
+{
+	MeshComponent->SetRelativeLocation(FVector(0.f, 0.f, Value * 100.f));
+}
