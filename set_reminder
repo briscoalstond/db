@@ -1,0 +1,10 @@
+import time
+import winsound
+
+def set_reminder(message, delay):
+    time.sleep(delay)
+    winsound.Beep(440, 1000)  # 播放蜂鸣声
+    print(f"提醒：{message}")
+
+# 使用示例
+set_reminder("喝水时间到了！", 10)  # 10 秒后提醒
