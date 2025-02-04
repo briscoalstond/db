@@ -1,0 +1,6 @@
+font = pygame.font.Font(None, 36)
+score = 0
+
+def display_score(score):
+    text = font.render(f"分数: {score}", True, (255, 255, 255))
+    screen.blit(text, (10, 10))
