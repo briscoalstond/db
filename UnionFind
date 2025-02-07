@@ -1,0 +1,33 @@
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+    
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # 路径压缩
+        return self.parent[x]
+    
+    def union(self, x, y):
+        rootX = self.find(x)
+        rootY = self.find(y)
+        if rootX == rootY:
+            return
+        # 按秩合并
+        if self.rank[rootX] < self.rank[rootY]:
+            self.parent[rootX] = rootY
+        else:
+            self.parent[rootY] = rootX
+            if self.rank[rootX] == self.rank[rootY]:
+                self.rank[rootX] += 1
+
+# 测试示例
+if __name__ == "__main__":
+    uf = UnionFind(5)  # 初始化 5 个元素：0, 1, 2, 3, 4
+    uf.union(0, 1)
+    uf.union(1, 2)
+    uf.union(3, 4)
+    print("0和2是否连通:", uf.find(0) == uf.find(2))  # 输出：True
+    print("0和3是否连通:", uf.find(0) == uf.find(3))  # 输出：False
+    uf.union(2, 3)
+    print("0和3是否连通（合并后）:", uf.find(0) == uf.find(3))  # 输出：True
