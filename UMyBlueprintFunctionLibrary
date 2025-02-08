@@ -1,0 +1,15 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "MyBlueprintFunctionLibrary.generated.h"
+
+UCLASS()
+class MYPROJECT_API UMyBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
+{
+    GENERATED_BODY()
+
+public:
+    UFUNCTION(BlueprintCallable, Category="Utilities")
+    static int32 GetRandomInt(int32 Min, int32 Max);
+};
