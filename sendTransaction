@@ -1,0 +1,15 @@
+const sender = '0xSenderAddress';     // 替换为发送方地址
+const receiver = '0xReceiverAddress'; // 替换为接收方地址
+const valueInEther = '0.1';           // 要发送的以太币数量
+
+web3.eth.sendTransaction({
+  from: sender,
+  to: receiver,
+  value: web3.utils.toWei(valueInEther, 'ether')
+})
+.then(receipt => {
+  console.log('交易成功，收据:', receipt);
+})
+.catch(error => {
+  console.error('交易失败:', error);
+});
