@@ -1,0 +1,29 @@
+import socket
+import threading
+
+def handle_client(client_socket):
+    try:
+        request = client_socket.recv(1024).decode('utf-8')
+        print("收到请求：", request.splitlines()[0])
+        response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"
+        response += "<html><body><h1>Hello, World!</h1></body></html>"
+        client_socket.send(response.encode('utf-8'))
+    except Exception as e:
+        print("处理客户端请求出错:", e)
+    finally:
+        client_socket.close()
+
+def start_server(host='0.0.0.0', port=8080):
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((host, port))
+    server.listen(5)
+    print(f"服务器启动，监听 {host}:{port}")
+    
+    while True:
+        client, addr = server.accept()
+        print(f"接收到来自 {addr} 的连接")
+        client_handler = threading.Thread(target=handle_client, args=(client,))
+        client_handler.start()
+
+if __name__ == '__main__':
+    start_server()
