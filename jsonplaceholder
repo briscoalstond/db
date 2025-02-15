@@ -1,0 +1,19 @@
+# 示例 10: 使用 requests 集成 RESTful API
+import requests
+
+def get_posts():
+    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
+if __name__ == '__main__':
+    posts = get_posts()
+    if posts:
+        print("获取到的前3个帖子:")
+        for post in posts[:3]:
+            print(f"标题: {post['title']}")
+    else:
+        print("请求失败")
