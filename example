@@ -1,0 +1,20 @@
+use reqwest;
+use tokio;
+
+#[tokio::main]
+async fn main() {
+    let urls = vec!["https://example.com", "https://example.org"];
+    let mut handles = vec![];
+
+    for url in urls {
+        let handle = tokio::spawn(async move {
+            let res = reqwest::get(url).await.unwrap();
+            println!("{}: {}", url, res.status());
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.await.unwrap();
+    }
+}
