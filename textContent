@@ -1,0 +1,7 @@
+<div id="timer" style="font-size: 3em;"></div>
+<script>
+    let seconds = 0;
+    setInterval(() => {
+        document.getElementById('timer').textContent = `Time: ${++seconds}s`;
+    }, 1000);
+</script>
